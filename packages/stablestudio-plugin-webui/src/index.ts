@@ -21,6 +21,14 @@ const manifest = {
     "This plugin uses [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui) as its back-end for inference",
 };
 
+const defaultConfig = {
+  webuiHostUrl: "https://stablestudio.dropified.ai:7860",
+  webuiSavedSampler: "Euler a",
+  webuiSavedModel: "v1-5-pruned-emaonly.safetensors [6ce0161689]",
+  historyImagesCount: "0",
+  upscaler1: "Lanczos"
+};
+
 const webuiUpscalers = [
   {
     label: "None",
@@ -246,7 +254,7 @@ export const createPlugin = StableStudio.createPlugin<{
   let webuiHostUrl = localStorage.getItem("webui-host-url");
 
   if (!webuiHostUrl || webuiHostUrl === "") {
-    webuiHostUrl = "http://127.0.0.1:7861";
+    webuiHostUrl = defaultConfig.webuiHostUrl;
   }
 
   return {
@@ -258,10 +266,10 @@ export const createPlugin = StableStudio.createPlugin<{
       return {
         steps: 20,
         sampler: {
-          id: localStorage.getItem("webui-saved-sampler") ?? "",
-          name: localStorage.getItem("webui-saved-sampler") ?? "",
+          id: localStorage.getItem("webui-saved-sampler") ?? defaultConfig.webuiSavedSampler,
+          name: localStorage.getItem("webui-saved-sampler") ?? defaultConfig.webuiSavedSampler,
         },
-        model: localStorage.getItem("webui-saved-model") ?? "",
+        model: localStorage.getItem("webui-saved-model") ?? defaultConfig.webuiSavedModel,
       };
     },
 
@@ -344,10 +352,10 @@ export const createPlugin = StableStudio.createPlugin<{
       baseUrl: {
         type: "string",
         title: "Host URL",
-        placeholder: "http://127.0.0.1:7861",
-        value: localStorage.getItem("webui-host-url") ?? "",
+        placeholder: webuiHostUrl,
+        value: localStorage.getItem("webui-host-url") ?? webuiHostUrl,
         description:
-          "The URL of the `stable-diffusion-webui` host, usually http://127.0.0.1:7861",
+          "The URL of the `stable-diffusion-webui` host, usually " + webuiHostUrl,
       },
 
       upscaler: {
