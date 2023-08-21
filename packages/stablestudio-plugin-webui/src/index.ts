@@ -22,7 +22,7 @@ const manifest = {
 };
 
 const defaultConfig = {
-  webuiHostUrl: "https://stablestudio.dropified.ai:7860",
+  webuiHostUrl: "https://stablestudio.dropified.ai:2053",
   webuiSavedSampler: "Euler a",
   webuiSavedModel: "v1-5-pruned-emaonly.safetensors [6ce0161689]",
   historyImagesCount: "0",

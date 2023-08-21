@@ -1,0 +1,3 @@
+sudo nohup yarn dev:use-webui-plugin --host >output.log 2>&1 &
+
+
